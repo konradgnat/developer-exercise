@@ -2,11 +2,34 @@
                     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+
+</head>
+<body>
+	<h1>BenchPrep Quotes Application</h1>
+	<table>
+      <thead>
+        <tr>
+          <th>Quote</th>
+          <th>Context</th>
+          <th>Source</th>
+          <th>Theme</th>
+        </tr>
+      </thead>
+      <tbody class="quotes-list"></tbody>
+    </table>
+
+  <script type="text/template" class="quotes-list-template">
+    <td><span class="quote"><%= quote %></span></td>
+    <td><span class="context"><%= context %></span></td>
+    <td><span class="source"><%= source %></span></td>
+    <td><span class="theme"><%= theme %></span></td>
+  </script>
+  
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
-</head>
-<body>
+  <script src="script.js"></script>
 
 </body>
 </html>
