@@ -1,5 +1,24 @@
 require 'minitest/autorun'
 
+
+class Array
+  def where(condition)
+    result = self
+    
+    condition.each do |key, value|
+      if value.class == Regexp
+        result = result.select { |item| condition[key] =~ item[key] }
+      elsif value.class == String
+        result = result.select { |item| item[key] == condition[key] }
+      elsif value.class == Fixnum
+        result = result.select { |item| item[key] == condition[key] }
+      end
+    end
+    return result
+  end
+end
+
+
 class WhereTest < Minitest::Test
   def setup
     @boris   = {:name => 'Boris The Blade', :quote => "Heavy is good. Heavy is reliable. If it doesn't work you can always hit them.", :title => 'Snatch', :rank => 4}

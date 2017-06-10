@@ -14,13 +14,6 @@ var Quote = Backbone.Model.extend({
 
 var Quotes = Backbone.Collection.extend({
 	url: 'https://gist.githubusercontent.com/anonymous/8f61a8733ed7fa41c4ea/raw/1e90fd2741bb6310582e3822f59927eb535f6c73/quotes.json',   
-    pagination : function(perPage, page) {
-       page = page-1;
-       var collection = this;
-       collection = _(collection.rest(perPage*page));
-       collection = _(collection.first(perPage));    
-       return collection.map( function(model) { return model.toJSON() } ); 
-    }
 });
 
 var quotes = new Quotes();
@@ -82,7 +75,5 @@ var quotesView = new QuotesView();
 
 
 $(document).ready(function(){
-	$('#next-page').on('click', function(){
-		quotes.next();
-	})
+
 });
