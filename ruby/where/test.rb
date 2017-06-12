@@ -18,8 +18,7 @@ class Array
   end
 end
 
-
-class WhereTest < Minitest::Test
+class WhereTest < Minitest::Unit::TestCase
   def setup
     @boris   = {:name => 'Boris The Blade', :quote => "Heavy is good. Heavy is reliable. If it doesn't work you can always hit them.", :title => 'Snatch', :rank => 4}
     @charles = {:name => 'Charles De Mar', :quote => 'Go that way, really fast. If something gets in your way, turn.', :title => 'Better Off Dead', :rank => 3}
@@ -30,11 +29,13 @@ class WhereTest < Minitest::Test
   end
 
   def test_where_with_exact_match
-    assert_equal [@wolf], @fixtures.where(:name => 'The Wolf'),
+
+    assert_equal [@wolf], @fixtures.where(:name => 'The Wolf')
   end
 
   def test_where_with_partial_match
-    assert_equal [@charles, @glen], @fixtures.where(:title => /^B.*/)
+
+   assert_equal [@charles, @glen], @fixtures.where(:title => /^B.*/)
   end
 
   def test_where_with_mutliple_exact_results
@@ -46,7 +47,9 @@ class WhereTest < Minitest::Test
   end
 
   def test_with_chain_calls
+
     assert_equal [@charles], @fixtures.where(:quote => /if/i).where(:rank => 3)
   end
 end
+
 
