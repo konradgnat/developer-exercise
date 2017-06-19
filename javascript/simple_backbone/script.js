@@ -12,6 +12,9 @@ var Quote = Backbone.Model.extend({
 	}
 });
 
+var page = 1;
+var quotes_per_page = 5;
+
 var Quotes = Backbone.Collection.extend({
 	url: 'https://gist.githubusercontent.com/anonymous/8f61a8733ed7fa41c4ea/raw/1e90fd2741bb6310582e3822f59927eb535f6c73/quotes.json',   
 });
@@ -44,11 +47,15 @@ var QuotesView = Backbone.View.extend({
 		console.log("quotesview initialize");
 		this.model.fetch({
 			success: function(response){
-				_.each(response.toJSON(), function(model){
+				this.$('.quotes-list').html('');
+				_.each(response.toJSON(), function(model, index){
 					console.log('successfully got blog with _id: '
 						+ model);
+					console.log('index =  ' + index);
 					// pagination logic here
-					self.$el.append((new QuoteView({model: model})).render().$el);
+					if(index < page * quotes_per_page && index >= (page - 1) * quotes_per_page){
+						self.$el.append((new QuoteView({model: model})).render().$el);
+					}
 				});
 			},
 			error: function(){
@@ -75,5 +82,16 @@ var quotesView = new QuotesView();
 
 
 $(document).ready(function(){
-
+	$('#next').on('click', function(){
+		if((page * quotes_per_page) < quotes.length) {
+			page++;
+			quotesView = new QuotesView();
+		}
+	});
+	$('#back').on('click', function(){
+		if(page > 1) {
+			page--;
+			quotesView = new QuotesView();
+		}
+	})
 });
