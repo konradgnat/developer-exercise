@@ -109,6 +109,10 @@ class Blackjack
     @player.display_hand
     puts "\nDealer cards: "
     @dealer.display_card
+    if @player.score == 21
+      puts "Blackjack! Player wins!"
+      play_or_quit
+    end
     while @player.stand_or_hit != "S" do
       puts "You chose Hit"
       player.new_card(@deck) 
